@@ -9,7 +9,7 @@
     文件说明：
             
 """
-import argparse
+import argparse, ipdb
 import json
 import math
 from tqdm import tqdm
@@ -69,6 +69,7 @@ def parse_args():
 
 
 def main():
+    ipdb.set_trace()
     args = parse_args()
 
     if args.local_rank == -1:
