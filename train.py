@@ -69,7 +69,6 @@ def parse_args():
 
 
 def main():
-    ipdb.set_trace()
     args = parse_args()
 
     if args.local_rank == -1:
@@ -95,6 +94,7 @@ def main():
     torch.distributed.barrier()
     # load tokenizer
     tokenizer = MODE[args.mode]["tokenizer"].from_pretrained(args.model_name_or_path)
+    ipdb.set_trace()
     print_rank_0("tokenizer.pad_token: {}".format(tokenizer.pad_token), args.global_rank)
     print_rank_0("tokenizer.eos_token: {}".format(tokenizer.eos_token), args.global_rank)
 
