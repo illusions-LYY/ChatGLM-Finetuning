@@ -1,6 +1,6 @@
 CUDA_VISIBLE_DEVICES=0 deepspeed --master_port 520 train.py \
       --train_path data/spo_0.json \
-      --model_name_or_path /home/shenfei/models/chatglm2-6b \
+      --model_name_or_path /home/shenfei/models/chatglm3-6b \
       --per_device_train_batch_size 1 \
       --max_len 768 \
       --max_src_len 512 \
