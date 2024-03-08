@@ -1,4 +1,4 @@
-CUDA_VISIBLE_DEVICES=0 deepspeed --master_port 520 train.py \
+CUDA_VISIBLE_DEVICES=0 deepspeed --master_port 5200 train.py \
       --train_path data/spo_0.json \
       --model_name_or_path /home/shenfei/models/chatglm3-6b \
       --per_device_train_batch_size 1 \
