@@ -94,7 +94,6 @@ def main():
     torch.distributed.barrier()
     # load tokenizer
     tokenizer = MODE[args.mode]["tokenizer"].from_pretrained(args.model_name_or_path)
-    ipdb.set_trace()
     print_rank_0("tokenizer.pad_token: {}".format(tokenizer.pad_token), args.global_rank)
     print_rank_0("tokenizer.eos_token: {}".format(tokenizer.eos_token), args.global_rank)
 
@@ -110,6 +109,7 @@ def main():
                             task_type="CAUSAL_LM",
                             inference_mode=False,
                             )
+        ipdb.set_trace()
         model = get_peft_model(model, config)
         model.config.torch_dtype = torch.float32
     elif args.train_type == "freeze":
