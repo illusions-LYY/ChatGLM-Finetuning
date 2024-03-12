@@ -20,4 +20,3 @@ CUDA_VISIBLE_DEVICES=0 deepspeed --master_port 5200 train.py \
         --gradient_checkpointing \
         --show_loss_step 10 \
         --output_dir ./output-glm2
->>>>>>> debug
