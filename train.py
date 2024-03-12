@@ -69,7 +69,6 @@ def parse_args():
 
 
 def main():
-    ipdb.set_trace()
     args = parse_args()
 
     if args.local_rank == -1:
@@ -110,7 +109,7 @@ def main():
                             task_type="CAUSAL_LM",
                             inference_mode=False,
                             )
-        model = get_peft_model(model, config)
+        model = get_peft_model(model, config)  # PEFT model准备（Lora）
         model.config.torch_dtype = torch.float32
     elif args.train_type == "freeze":
         model = MODE[args.mode]["model"].from_pretrained(args.model_name_or_path)
@@ -187,11 +186,11 @@ def main():
                                                                                len(train_dataloader)), args.global_rank)
         model.train()
         for step, batch in tqdm(enumerate(train_dataloader), total=len(train_dataloader), unit="batch"):
-            batch = to_device(batch, device)
+            batch = to_device(batch, device)  # todo：看一下这里的数据
             outputs = model(**batch, use_cache=False)
             loss = outputs.loss
             tr_loss += loss.item()
-            model.backward(loss)
+            model.backward(loss)  # 这一行爆显存
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             model.step()
             if (step + 1) % args.gradient_accumulation_steps == 0:
